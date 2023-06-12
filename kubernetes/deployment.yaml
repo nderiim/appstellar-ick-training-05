@@ -1,10 +1,10 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-deployment
+  name: next-web-server
   namespace: nderim
   labels:
-    app: nginx
+    app: web-server
 spec:
   strategy:
     type: RollingUpdate # Deletes some, and creates some | Recreate deletes all of them, and then creates the new ones.
@@ -15,14 +15,15 @@ spec:
   replicas: 5
   selector:
     matchLabels:
-      app: nginx
+      app: web-server
   template:
     metadata:
       labels:
-        app: nginx
+        app: web-server
     spec:
       containers:
-      - name: nginx
-        image: nginx
+      - name: web-server
+        image: my-next-web-server:1
+        imagePullPolicy: IfNotPresent
         ports:
-        - containerPort: 80
+        - containerPort: 3000

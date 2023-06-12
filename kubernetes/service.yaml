@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-service
+  namespace: nderim
+spec:
+  selector: # refers to the label created on the deployment
+    app: web-server
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000
