@@ -16,3 +16,10 @@ resource "aws_s3_bucket" "example" {
     Environment = "Dev"
   }
 }
+
+module "s3_object" {
+  source = "./modules/s3"
+  bucket_name = aws_s3_bucket.example.bucket
+  file_key = "my-first-bucket-file"
+  file_source = "./this-is-my-file.txt"
+}
